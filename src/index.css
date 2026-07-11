@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Roboto:wght@400;500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-roboto: "Roboto", sans-serif;
+}
+
+@layer utilities {
+  /* Skeuomorphic Industrial */
+  .bg-brushed-aluminum {
+    background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%),
+                linear-gradient(90deg, #d8d8d8 0%, #e8e8e8 20%, #d8d8d8 40%, #c8c8c8 60%, #e8e8e8 80%, #d8d8d8 100%);
+    background-size: 100% 100%, 200px 100%;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+  }
+  .text-embossed-steel {
+    color: #888;
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.8), -1px -1px 0px rgba(0,0,0,0.4);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+  }
+  .btn-recessed {
+    background: linear-gradient(to bottom, #d0d0d0, #e0e0e0);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), inset 0 -1px 1px rgba(255,255,255,0.8), 0 1px 0 rgba(255,255,255,0.5);
+    color: #555;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    border: 1px solid #a0a0a0;
+  }
+  .btn-recessed:active {
+    box-shadow: inset 0 3px 6px rgba(0,0,0,0.4), inset 0 -1px 1px rgba(255,255,255,0.6);
+  }
+  .icon-brass {
+    color: #b5a642;
+    filter: drop-shadow(1px 1px 0px rgba(255,255,255,0.6)) drop-shadow(-1px -1px 0px rgba(0,0,0,0.6));
+  }
+  .toggle-metal {
+    background: radial-gradient(circle at 50% 20%, #f0f0f0, #a0a0a0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5), inset 0 -2px 4px rgba(0,0,0,0.2);
+    border: 1px solid #888;
+  }
+
+  /* Cyberpunk Neon */
+  .bg-neon-grid {
+    background-color: #050505;
+    background-image: 
+      linear-gradient(rgba(255, 0, 255, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center center;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+  }
+  .text-neon-blue {
+    color: #fff;
+    text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+  }
+  .text-neon-purple {
+    color: #fff;
+    text-shadow: 0 0 5px #f0f, 0 0 10px #f0f, 0 0 20px #f0f, 0 0 40px #f0f;
+  }
+  .text-neon-magenta {
+    color: #fff;
+    text-shadow: 0 0 5px #ff0055, 0 0 10px #ff0055, 0 0 20px #ff0055, 0 0 40px #ff0055;
+  }
+  .icon-segmented {
+    filter: drop-shadow(0 0 5px #0ff) drop-shadow(0 0 10px #0ff);
+    clip-path: polygon(0 10%, 10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%);
+  }
+  .swatch-pulsing {
+    box-shadow: 0 0 10px currentColor;
+    animation: pulse-glow 2s infinite alternate;
+  }
+  @keyframes pulse-glow {
+    from { box-shadow: 0 0 5px currentColor; }
+    to { box-shadow: 0 0 15px currentColor, 0 0 30px currentColor; }
+  }
+
+  /* Vintage Serif Print */
+  .bg-aged-paper {
+    background-color: #f4ecd8;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    box-shadow: inset 0 0 40px rgba(90, 24, 24, 0.1);
+  }
+  .border-etched {
+    border: 2px solid #5a1818;
+    border-radius: 2px;
+    position: relative;
+  }
+  .border-etched::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border: 1px solid rgba(90, 24, 24, 0.5);
+    pointer-events: none;
+  }
+  .text-woodcut {
+    color: #5a1818;
+    text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.5);
+    letter-spacing: 0.02em;
+  }
+  .icon-celestial {
+    color: #5a1818;
+    stroke-width: 1.5;
+    filter: drop-shadow(0.5px 0.5px 0px rgba(255,255,255,0.5));
+  }
+  .swatch-wax-seal {
+    background: radial-gradient(circle at 30% 30%, #8a2828, #4a0808);
+    border: 1px solid #3a0000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.2);
+    border-radius: 50%;
+    position: relative;
+  }
+  .swatch-wax-seal::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 2px; right: 2px; bottom: 2px;
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 50%;
+  }
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+}
+
+@theme {
+  --font-sans: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  font-family: var(--font-sans);
+}
