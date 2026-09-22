@@ -15,6 +15,11 @@ function extractYouTubeID(url: string): string | null {
   return match && match[7].length === 11 ? match[7] : null;
 }
 
+function extractYouTubeStartTime(url: string): number | null {
+  const match = url.match(/[?&]t=(\d+)s?/);
+  return match ? parseInt(match[1], 10) : null;
+}
+
 // --- Data ---
 const PROJECTS = [
   {
@@ -23,6 +28,27 @@ const PROJECTS = [
     category: 'SHOWREEL',
     url: 'https://www.youtube.com/watch?v=B6zvpHDTkx0',
     thumbnail: 'https://img.youtube.com/vi/B6zvpHDTkx0/maxresdefault.jpg',
+  },
+  {
+    id: 2,
+    title: 'Commercial Edit',
+    category: 'COMMERCIAL / MOTION',
+    url: 'https://www.youtube.com/watch?v=zU8DXqImEl0&t=48s',
+    thumbnail: 'https://img.youtube.com/vi/zU8DXqImEl0/maxresdefault.jpg',
+  },
+  {
+    id: 3,
+    title: 'Storytelling & VFX Edit',
+    category: 'YOUTUBE / STORYTELLING',
+    url: 'https://www.youtube.com/watch?v=XFGbz_eryEI&t=691s',
+    thumbnail: 'https://img.youtube.com/vi/XFGbz_eryEI/maxresdefault.jpg',
+  },
+  {
+    id: 4,
+    title: 'Digital Dementia / Motion Edit',
+    category: 'MOTION DESIGN / 3D',
+    url: '/4.mp4?v=5',
+    thumbnail: '/4.mp4?v=5',
   },
 ];
 
@@ -137,6 +163,7 @@ const Navbar = () => {
 
 const VideoModal = ({ url, onClose }: { url: string; onClose: () => void }) => {
   const videoId = extractYouTubeID(url);
+  const startTime = extractYouTubeStartTime(url);
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -186,7 +213,7 @@ const VideoModal = ({ url, onClose }: { url: string; onClose: () => void }) => {
             <iframe
               width="100%"
               height="100%"
-              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}`}
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}${startTime ? `&start=${startTime}` : ''}`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -255,7 +282,7 @@ export default function App() {
             <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">MY PROJECTS</span>
             <div className="h-px w-8 sm:w-24 bg-neutral-400 dark:bg-neutral-600"></div>
           </FadeIn>
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:gap-12 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
             {PROJECTS.map((project, index) => (
               <FadeIn key={project.id} delay={index * 0.1}>
                 <div 
